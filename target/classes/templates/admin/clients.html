@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Client Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div th:replace="Utils/navbar :: navbar"></div>
+
+<div class="container mt-4 ">
+    <h2 class="mb-4">Client List</h2>
+
+
+    <table class="table table-striped  mb-5">
+        <thead class="table-dark">
+        <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Username</th>
+            <th>Balance</th>
+            <th>Currency</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="client : ${listClients}">
+            <td th:text="${client.firstname}"></td>
+            <td th:text="${client.lastname}"></td>
+            <td th:text="${client.username}"></td>
+            <td th:text="${client.Compte.balance}"></td>
+           <td th:text="${client.Compte.currency}"></td>
+            <td>
+                <a th:href="@{'/admin/clients/edit/' + ${client.id}}" class="btn btn-sm btn-warning">Edit</a>
+                <a th:href="@{'/admin/clients/delete/' + ${client.id}}" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+<br>
+<br>
+<br>
+
+    <div class="card shadow-lg rounded-4 mt-5 pt-3 mb-5">
+
+        <h3 class=" m-3">Add New Client</h3>
+        <div class="card-body p-4">
+            <form th:action="@{/admin/save}" method="post">
+                <input type="hidden" name="id" th:value="${editedUser!=null ? editedUser.id : ''}">
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label">Firstname</label>
+                        <input type="text" class="form-control"  th:value="${editedUser!=null ? editedUser.firstname : ''}" name="firstname" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Lastname</label>
+                        <input type="text" class="form-control"  th:value="${editedUser!=null ? editedUser.lastname : ''}" name="lastname" required>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col">
+                        <label class="form-label">Username</label>
+                        <input type="text" class="form-control"  th:value="${editedUser!=null ? editedUser.username : ''}" name="username" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control"  th:value="${editedUser!=null ? editedUser.password : ''}" name="password" required>
+                    </div>
+                </div>
+
+                <div class="row mb-4">
+                    <div class="col">
+                        <label class="form-label">Balance</label>
+                        <input type="number" class="form-control"   th:value="${editedCompte!=null ? editedCompte.balance : ''}" name="balance" step="0.01" required>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Currency</label>
+                        <select class="form-select" name="currency" required>
+                            <option value="DH" th:selected="${editedCompte != null and editedCompte.currency.toString() == 'DH'}">MAD</option>
+                            <option value="$" th:selected="${editedCompte != null and editedCompte.currency.toString() == '$'}">USD</option>
+                            <option value="€" th:selected="${editedCompte != null and editedCompte.currency.toString() == '€'}">EUR</option>
+                            <option value="£" th:selected="${editedCompte != null and editedCompte.currency.toString() == '£'}">GBP</option>
+                        </select>
+
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

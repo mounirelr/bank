@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div th:fragment="navbar">
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+
+            <a class="navbar-brand" href="#"><h3 class="m-0">Bank</h3></a>
+
+
+            <div class="mx-auto">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/admin/clients}">Client</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/credit}">Credit</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/profil}">Profil</a>
+                    </li>
+                </ul>
+            </div>
+
+
+            <span class="navbar-text">
+                Your Name
+            </span>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
