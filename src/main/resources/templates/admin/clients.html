@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<div th:replace="Utils/navbar :: navbar"></div>
+<div th:include="fragment/navbar :: navbar"></div>
 
 <div class="container mt-4 ">
     <h2 class="mb-4">Client List</h2>
@@ -45,7 +45,7 @@
 
     <div class="card shadow-lg rounded-4 mt-5 pt-3 mb-5">
 
-        <h3 class=" m-3">Add New Client</h3>
+        <h3 class=" m-3" th:text="${editedUser != null} ? 'Edit Client' : 'Add New Client'"> </h3>
         <div class="card-body p-4">
             <form th:action="@{/admin/save}" method="post">
                 <input type="hidden" name="id" th:value="${editedUser!=null ? editedUser.id : ''}">
