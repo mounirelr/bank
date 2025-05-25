@@ -15,13 +15,13 @@
             <div class="mx-auto">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex flex-row gap-3">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/}">Home</a>
+                        <a class="nav-link" th:href="@{/admin/home}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/admin/clients}">Client</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/credit}">Credit</a>
+                        <a class="nav-link" th:href="@{/admin/credits}">Credit</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" th:href="@{/profil}">Profil</a>
@@ -30,8 +30,8 @@
             </div>
 
 
-            <span class="navbar-text">
-                Your Name
+            <span class="navbar-text" th:text="${ConnectedUser.firstname + ' '+ ConnectedUser.lastname}">
+
             </span>
         </div>
     </nav>

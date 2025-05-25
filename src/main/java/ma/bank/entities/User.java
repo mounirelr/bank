@@ -5,6 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Data
 @AllArgsConstructor
@@ -21,14 +24,13 @@ public class User {
     private Role role;
 
 
-
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Compte compte;
 
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+    private List<Credit> credits = new ArrayList<>();
 
-    //   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    // private List<Credit> credits = new ArrayList<>();
+
 
 }
