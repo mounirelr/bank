@@ -27,7 +27,18 @@ public class SecurityConfig {
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/admin/home", true)
+                        .successHandler((request, response, authentication) -> {
+                            boolean isAdmin = authentication.getAuthorities().stream()
+                                    .anyMatch(a -> a.getAuthority().equals("ROLE_Admin"));
+                            boolean isClient = authentication.getAuthorities().stream()
+                                    .anyMatch(a -> a.getAuthority().equals("ROLE_Client"));
+
+                            if (isAdmin) {
+                                response.sendRedirect("/admin/home");
+                            } else if (isClient) {
+                                response.sendRedirect("/client/home");
+                            }
+                        })
                         .failureUrl("/login?error=true")
                 )
                 .logout(logout -> logout
@@ -36,6 +47,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
 
 
     @Bean
