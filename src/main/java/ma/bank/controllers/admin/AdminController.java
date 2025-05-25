@@ -137,7 +137,7 @@ public class AdminController {
     @Transactional
     public String accepteCredit(@PathVariable Long id) {
         Credit credit = creditRepository.findById(id).orElseThrow();
-        if (credit != null) {
+        if (credit != null && credit.getStatus().toString().equals("Pending")) {
             credit.setStatus(Status.Accepted);
             creditRepository.save(credit);
         }
@@ -153,7 +153,7 @@ public class AdminController {
 
     public String refuseCredit(@PathVariable Long id) {
         Credit credit = creditRepository.findById(id).orElse(null);
-        if(credit!=null) {
+        if(credit!=null && credit.getStatus().toString().equals("Pending")) {
             credit.setStatus(Status.Rejected);
             creditRepository.save(credit);
         }

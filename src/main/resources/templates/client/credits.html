@@ -37,7 +37,7 @@
                     <td th:text="${credit.salary}"></td>
                     <td th:text="${credit.status}"></td>
                     <td th:if="${credit.status.toString() == 'Pending'}">
-                        <a th:href="@{'/client/clients/delete/' + ${credit.id}}"
+                        <a th:href="@{'/client/credits/delete/' + ${credit.id}}"
                            class="btn btn-sm btn-danger"
                            onclick="return confirm('Are you sure?')">Delete</a>
                     </td>

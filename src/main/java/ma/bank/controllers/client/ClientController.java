@@ -65,4 +65,13 @@ public class ClientController {
         creditRepository.save(credit);
         return "redirect:/client/credits";
     }
+
+    @GetMapping("/credits/delete/{id}")
+    public String deleteCredit(@PathVariable Long id) {
+        Credit credit = creditRepository.findById(id).get();
+        if(credit != null && credit.getStatus().toString().equals("Pending")) {
+            creditRepository.delete(credit);
+        }
+        return "redirect:/client/credits";
+    }
 }
